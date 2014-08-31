@@ -17,7 +17,7 @@ import sys
 import unittest
 
 stackLibraryPath = os.path.abspath('../')
-sys.path.insert(0, stackLibraryPath)
+sys.path.insert(0, StackLibraryPath)
 import stack
 
 

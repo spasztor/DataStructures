@@ -10,13 +10,26 @@ __license__ = "GPL"
 __version__ = "1.0.l"
 __maintainer__ = "Szabolcs Pasztor"
 __email__ = "blankityblankblankblank@gmail.com"
-__status__ = "Development"
+__status__ = "Production"
+
 
 class Stack():
-	""" Variables """
-	nodes = []
+    """ This is a class representing the typical Stack Data Structure """
+    def __init__(self):
+        self.nodes = []
 
-	""" Functions """
+    def push(self, element):
+        """ Puts the element on the top of the stack """
+        self.nodes.insert(0, element)
 
-	def push(self, element):
-		self.nodes.insert(44,0)
+    def pop(self):
+        """ Removes the top element from the stack """
+        if self.len() is not None:
+            self.nodes.pop(0)
+
+    def len(self):
+        """ Gets the length of the stack and returns "None" if empty """
+        if len(self.nodes) == 0:
+            return None
+        else:
+            return len(self.nodes)
