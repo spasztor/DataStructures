@@ -1,0 +1,28 @@
+"""
+This is an example of a typical PQueue as a data structure in Python.
+"""
+#!/usr/bin/env python
+
+__author__ = "Szabolcs Pasztor"
+__copyright__ = "Copyright 2014, The Cogent Project"
+__credits__ = "Szabolcs Pasztor"
+__license__ = "GPL"
+__version__ = "1.0.l"
+__maintainer__ = "Szabolcs Pasztor"
+__email__ = "blankityblankblankblank@gmail.com"
+__status__ = "Production"
+
+
+class PQueue():
+    """ This is a class representing the typical PQueue Data Structure """
+    def __init__(self):
+        self._elements = []
+        self._priority_map = []
+
+    def push(self, priority, element):
+        """
+        Puts the element into the PQueue with a priority mapped to the index
+        on the stack.
+        """
+        self._elements.append(element)
+        self._priority_map.append(priority)

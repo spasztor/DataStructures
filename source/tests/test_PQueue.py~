@@ -1,0 +1,48 @@
+"""
+This is a unit test of the PQueue class in 'Queue.py'.
+"""
+#!/usr/bin/env python
+
+__author__ = "Szabolcs Pasztor"
+__copyright__ = "Copyright 2014, The Cogent Project"
+__credits__ = "Szabolcs Pasztor"
+__license__ = "GPL"
+__version__ = "1.0.l"
+__maintainer__ = "Szabolcs Pasztor"
+__email__ = "blankityblankblankblank@gmail.com"
+__status__ = "Production"
+
+import os
+import sys
+import unittest
+
+_LIBRARY_PATH = os.path.abspath('../')
+sys.path.insert(0, _LIBRARY_PATH)
+import PQueue
+
+
+class TestPQueueMethods(unittest.TestCase):
+    """ Tests the methods that can be used for the PQueue Class in stack.py. """
+    def setUp(self):
+        """ Used for unittest initiation. """
+        self._pqueue = PQueue.PQueue()
+
+    def _clear_pqueue(self):
+        """ Clears the PQueue for testing purposes. """
+        self._pqueue._elements = []
+        self._pqueue._priority_map = []
+
+    def test_push(self):
+        """ Tests pQueue.push(). """
+        self._clear_pqueue()
+
+        self._pqueue.push(1, "Foo")
+        self._pqueue.push(4, "Bar")
+
+        self.assertEquals(self._pqueue._elements[0], "Foo")
+        self.assertEquals(self._pqueue._elements[1], "Bar")
+        self.assertEquals(self._pqueue._priority_map[0], 1)
+        self.assertEquals(self._pqueue._priority_map[1], 4)
+
+_TEST_SUITE = unittest.TestLoader().loadTestsFromTestCase(TestPQueueMethods)
+unittest.TextTestRunner(verbosity=2).run(_TEST_SUITE)
