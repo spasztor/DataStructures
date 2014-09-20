@@ -47,8 +47,8 @@ class TestStackMethods(unittest.TestCase):
 
         self.stack.nodes.append(1)
         self.stack.nodes.append(2)
-        self.stack.pop()
 
+        self.assertEquals(self.stack.pop(), 1)
         self.assertEquals(len(self.stack.nodes), 1)
 
     def test_pop_when_empty(self):

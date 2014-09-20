@@ -14,7 +14,7 @@ __status__ = "Production"
 
 
 class Stack():
-    """ This is a class representing the typical Stack Data Structure """
+    """ This is a class representing the typical Stack Data Structure. """
     def __init__(self):
         self.nodes = []
 
@@ -23,12 +23,14 @@ class Stack():
         self.nodes.insert(0, element)
 
     def pop(self):
-        """ Removes the top element from the stack """
+        """ Removes the top element from the stack and returns it. """
         if self.len() is not None:
-            self.nodes.pop(0)
+            return self.nodes.pop(0)
+        else:
+            return None
 
     def len(self):
-        """ Gets the length of the stack and returns "None" if empty """
+        """ Gets the length of the stack and returns "None" if empty. """
         if len(self.nodes) == 0:
             return None
         else:

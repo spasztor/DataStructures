@@ -18,18 +18,18 @@ import unittest
 
 LibraryPath = os.path.abspath('../')
 sys.path.insert(0, LibraryPath)
-import Queue
+import queue
 
 
 class TestQueueMethods(unittest.TestCase):
     """ Tests the methods that can be used for the Queue Class in stack.py. """
     def setUp(self):
         """ Used for unittest initiation. """
-        self.queue = Queue.Queue()
+        self.queue = queue.Queue()
 
     def clearQueue(self):
         """ Clears the Queue for testing purposes. """
-        self.queue.nodes = []
+        self.queue._nodes = []
 
     def test_push(self):
         """ Tests queue.push(). """
@@ -38,33 +38,32 @@ class TestQueueMethods(unittest.TestCase):
         self.queue.push(1)
         self.queue.push(2)
 
-        self.assertEquals(self.queue.nodes[0], 1)
-        self.assertEquals(self.queue.nodes[1], 2)
+        self.assertEquals(self.queue._nodes[0], 1)
+        self.assertEquals(self.queue._nodes[1], 2)
 
     def test_pop(self):
         """ Tests queue.pop(). """
         self.clearQueue()
 
-        self.queue.nodes.append(1)
-        self.queue.nodes.append(2)
-        self.queue.pop()
+        self.queue._nodes.append(1)
+        self.queue._nodes.append(2)
 
-        self.assertEquals(len(self.queue.nodes), 1)
+        self.assertEquals(self.queue.pop(), 1)
+        self.assertEquals(len(self.queue._nodes), 1)
 
     def test_pop_when_empty(self):
         """ Tests queue.pop() when the queue is empty. """
         self.clearQueue()
-
         self.queue.pop()
 
-        self.assertEquals(len(self.queue.nodes), 0)
+        self.assertEquals(len(self.queue._nodes), 0)
 
     def test_len(self):
         """ Tests queue.len(). """
         self.clearQueue()
 
-        self.queue.nodes.append(1)
-        self.queue.nodes.append(2)
+        self.queue._nodes.append(1)
+        self.queue._nodes.append(2)
 
         self.assertEquals(self.queue.len(), 2)
 
@@ -72,7 +71,7 @@ class TestQueueMethods(unittest.TestCase):
         """ Tests queue.len() when the queue is empty. """
         self.clearQueue()
 
-        self.assertEquals(self.queue.len(), None)
+        self.assertEquals(self.queue.len(), 0)
 
 testSuite = unittest.TestLoader().loadTestsFromTestCase(TestQueueMethods)
 unittest.TextTestRunner(verbosity=2).run(testSuite)
