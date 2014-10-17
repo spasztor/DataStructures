@@ -37,9 +37,9 @@ class PQueue():
         if priority in self._queues:
             self._queues[priority].push(element)
         else:
-            _queue = queue.Queue()
-            _queue.push(element)
-            self._queues[priority] = _queue
+            new_queue = queue.Queue()
+            new_queue.push(element)
+            self._queues[priority] = new_queue
 
     def pop(self):
         """
@@ -49,12 +49,8 @@ class PQueue():
         served basis.
         """
         if self.len() is not 0:
-            priorities = self._queues(keys).sorted()
+            priorities = sorted(self._queues.keys())
             priority_element = priorities[0]
-            element_to_return = self._queues[priority_element].pop()
-
-            """
+            self._queues[priority_element].pop()
             if self._queues[priority_element].len() is 0:
-                del (self._queues
-                self._queues.del(priority_element)
-            """
+                del self._queues[priority_element]

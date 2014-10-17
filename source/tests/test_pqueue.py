@@ -27,13 +27,32 @@ class TestPQueueMethods(unittest.TestCase):
 
     def _clean(self):
         """ Clears the PQueue for testing purposes """
-        self._pqueue._queues = []
-        self._pqueue._priority_map = []
+        self._pqueue._queues = {}
 
-    def test_len(self):
-        """ Tests PQueue.len() """
+    def test_len_with_one_push(self):
+        """ Tests PQueue.len() with normal cond."""
+        self._pqueue.push(1, "Foo")
+
+        self.assertEquals(self._pqueue.len(), 1)
+
+        self._clean()
+
+    def test_len_with_several_push(self):
+        """ Tests PQueue.len() with several pushes."""
         self._pqueue.push(1, "Foo")
         self._pqueue.push(4, "Bar")
+        self._pqueue.push(4, "Bar2")
+
+        self.assertEquals(self._pqueue.len(), 3)
+
+        self._clean()
+
+    def test_len_with_push_and_pop(self):
+        """ Tests PQueue.len() with pushes and pops."""
+        self._pqueue.push(1, "Foo")
+        self._pqueue.push(1, "Bar")
+        self._pqueue.push(3, "Bar2")
+        self._pqueue.pop()
 
         self.assertEquals(self._pqueue.len(), 2)
 
@@ -43,11 +62,12 @@ class TestPQueueMethods(unittest.TestCase):
         """ Tests PQueue.pop() """
         self._pqueue.push(1, "Foo")
         self._pqueue.push(4, "Bar")
+
         self._pqueue.pop()
 
         self.assertEquals(self._pqueue.len(), 1)
-        self.assertEquals(self._pqueue._queues[0], "Bar")
-        self.assertEquals(self._pqueue._priority_map[0], 4)
+        self.assertEquals(len(self._pqueue._queues.keys()), 1)
+        self.assertEquals(self._pqueue._queues[4]._nodes[0], "Bar")
 
         self._clean()
 
@@ -56,6 +76,7 @@ class TestPQueueMethods(unittest.TestCase):
         self._pqueue.pop()
 
         self.assertEquals(self._pqueue.len(), 0)
+        self.assertEquals(len(self._pqueue._queues.keys()), 0)
 
         self._clean()
 
@@ -64,6 +85,8 @@ class TestPQueueMethods(unittest.TestCase):
         self._pqueue.push(1, "Foo")
         self._pqueue.push(4, "Bar")
 
+        self.assertEquals(self._pqueue.len(), 2)
+        self.assertEquals(len(self._pqueue._queues.keys()), 2)
         self.assertEquals(self._pqueue._queues[1]._nodes[0], "Foo")
         self.assertEquals(self._pqueue._queues[4]._nodes[0], "Bar")
 
@@ -74,6 +97,8 @@ class TestPQueueMethods(unittest.TestCase):
         self._pqueue.push(1, "Foo")
         self._pqueue.push(1, "Bar")
 
+        self.assertEquals(self._pqueue.len(), 2)
+        self.assertEquals(len(self._pqueue._queues.keys()), 1)
         self.assertEquals(self._pqueue._queues[1]._nodes[0], "Foo")
         self.assertEquals(self._pqueue._queues[1]._nodes[1], "Bar")
 
