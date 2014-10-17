@@ -53,5 +53,8 @@ class PQueue():
             priority_element = priorities[0]
             element_to_return = self._queues[priority_element].pop()
 
+            """
             if self._queues[priority_element].len() is 0:
+                del (self._queues
                 self._queues.del(priority_element)
+            """
